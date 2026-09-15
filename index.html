@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="INOVA conecta pessoas a empregos, bicos e talentos locais.">
+	<title>INOVA | Oportunidade que começa perto</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+		:root {
+			--ink: #18242b;
+			--muted: #66747b;
+			--paper: #f5f6f2;
+			--surface: #ffffff;
+			--line: #dfe5df;
+			--navy: #183b4b;
+			--navy-strong: #0f2c39;
+			--coral: #e56e4f;
+			--coral-soft: #fff0e9;
+			--mint: #d8eee2;
+			--yellow: #f7d788;
+			--shadow: 0 18px 50px rgba(24, 59, 75, .10);
+			--shadow-small: 0 5px 18px rgba(24, 59, 75, .08);
+			--radius: 18px;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; line-height: 1.5; }
+		button, input, select, textarea { font: inherit; }
+		button { cursor: pointer; }
+		a { color: inherit; text-decoration: none; }
+		.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+		.topbar { background: var(--navy-strong); color: #eaf4ef; font-size: .78rem; letter-spacing: .02em; }
+		.topbar-inner, .nav-inner, .wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+		.topbar-inner { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; }
+		.topbar strong { color: var(--yellow); }
+		.nav { position: sticky; top: 0; z-index: 10; background: rgba(245, 246, 242, .93); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(223, 229, 223, .85); }
+		.nav-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+		.brand { display: inline-flex; align-items: center; gap: 11px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.25rem; color: var(--navy); white-space: nowrap; }
+		.brand-logo { width: 58px; height: 45px; object-fit: contain; border-radius: 8px; background: white; }
+		.brand-mark { width: 35px; height: 35px; display: grid; place-items: center; color: var(--navy); background: var(--yellow); border-radius: 11px 11px 11px 3px; font-size: 1.05rem; }
+		.brand em { color: var(--coral); font-style: normal; }
+		.nav-links { display: flex; align-items: center; gap: 17px; color: var(--muted); font-size: .82rem; font-weight: 600; }
+		.nav-links a:hover { color: var(--navy); }
+		.nav-actions { display: flex; align-items: center; gap: 9px; }
+
+		.btn { border: 0; border-radius: 10px; padding: 11px 17px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: .88rem; transition: transform .2s, box-shadow .2s, background .2s; }
+		.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-small); }
+		.btn-primary { background: var(--coral); color: white; }
+		.btn-primary:hover { background: #d95b3b; }
+		.btn-navy { background: var(--navy); color: white; }
+		.btn-navy:hover { background: var(--navy-strong); }
+		.btn-quiet { color: var(--navy); background: transparent; border: 1px solid var(--line); }
+		.btn-quiet:hover { background: white; }
+		.btn-small { padding: 8px 12px; font-size: .8rem; }
+
+		.hero { overflow: hidden; background: var(--navy); color: white; position: relative; }
+		.hero::after { content: ''; position: absolute; right: -90px; top: -110px; width: 390px; height: 390px; border: 1px solid rgba(247, 215, 136, .25); border-radius: 50%; box-shadow: 0 0 0 32px rgba(247, 215, 136, .05), 0 0 0 64px rgba(247, 215, 136, .04); }
+		.hero-inner { width: min(1160px, calc(100% - 40px)); margin: 0 auto; padding: 76px 0 82px; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 70px; position: relative; z-index: 1; }
+		.eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--yellow); font-size: .75rem; text-transform: uppercase; letter-spacing: .13em; font-weight: 700; margin-bottom: 18px; }
+		.eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--coral); }
+		h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; line-height: 1.08; margin: 0; }
+		h1 { max-width: 700px; font-size: clamp(2.8rem, 6vw, 5.25rem); letter-spacing: -.065em; }
+		.hero-copy { max-width: 570px; margin: 22px 0 30px; color: #c9d8d4; font-size: 1.07rem; }
+		.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+		.hero .btn-quiet { color: white; border-color: #52717a; }
+		.hero-note { margin-top: 18px; color: #99b2af; font-size: .8rem; }
+		.hero-panel { background: #f8fbf7; color: var(--ink); border-radius: 22px; padding: 22px; box-shadow: 18px 22px 0 rgba(247, 215, 136, .92); transform: rotate(2deg); }
+		.panel-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 1px solid var(--line); }
+		.panel-label { font-size: .76rem; font-weight: 700; color: var(--muted); }
+		.live { display: inline-flex; align-items: center; gap: 6px; color: #22835e; font-size: .72rem; font-weight: 700; }
+		.live::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #32b87d; }
+		.mini-job { display: grid; grid-template-columns: 42px 1fr auto; gap: 12px; align-items: center; padding: 17px 0; border-bottom: 1px solid var(--line); }
+		.mini-job:last-child { border: 0; padding-bottom: 3px; }
+		.mini-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: var(--mint); font-size: 1.15rem; }
+		.mini-job:nth-child(3) .mini-icon { background: var(--coral-soft); }
+		.mini-job h3 { font-size: .92rem; letter-spacing: -.02em; }
+		.mini-job p { margin: 4px 0 0; color: var(--muted); font-size: .75rem; }
+		.mini-tag { color: var(--coral); font-size: .7rem; font-weight: 700; }
+
+		.stats { border-bottom: 1px solid var(--line); background: #fff; }
+		.stats-inner { width: min(1160px, calc(100% - 40px)); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); }
+		.stat { padding: 24px 0; display: flex; align-items: center; justify-content: center; gap: 13px; border-right: 1px solid var(--line); }
+		.stat:first-child { justify-content: flex-start; }
+		.stat:last-child { border: 0; justify-content: flex-end; }
+		.stat strong { font-family: 'Space Grotesk'; color: var(--navy); font-size: 1.45rem; }
+		.stat span { color: var(--muted); font-size: .78rem; }
+
+		main { padding: 60px 0 80px; }
+		.section-head { display: flex; justify-content: space-between; align-items: end; gap: 25px; margin-bottom: 24px; }
+		.section-kicker { color: var(--coral); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; margin-bottom: 9px; }
+		h2 { font-size: clamp(1.8rem, 3vw, 2.65rem); letter-spacing: -.05em; color: var(--navy); }
+		.section-head p { max-width: 420px; margin: 8px 0 0; color: var(--muted); font-size: .92rem; }
+		.filters { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 30px; }
+		.filter { border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 999px; padding: 8px 14px; font-size: .8rem; font-weight: 700; }
+		.filter.active, .filter:hover { border-color: var(--navy); background: var(--navy); color: white; }
+		.jobs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+		.job-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 21px; min-height: 250px; display: flex; flex-direction: column; justify-content: space-between; transition: transform .2s, box-shadow .2s; }
+		.job-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+		.job-card-top { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+		.job-type { display: inline-flex; width: fit-content; padding: 5px 9px; border-radius: 6px; background: var(--coral-soft); color: #bd5237; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+		.job-type.fixed { background: #e9f5ed; color: #287252; }
+		.bookmark { border: 0; background: transparent; color: #9ca9aa; font-size: 1.1rem; padding: 0; }
+		.bookmark.saved { color: var(--coral); }
+		.job-card h3 { margin: 18px 0 7px; color: var(--navy); font-size: 1.18rem; letter-spacing: -.03em; }
+		.company { color: var(--coral); font-size: .82rem; font-weight: 700; }
+		.job-description { color: var(--muted); font-size: .84rem; margin: 13px 0 18px; }
+		.job-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+		.location { color: var(--muted); font-size: .75rem; }
+		.empty { grid-column: 1 / -1; padding: 42px; text-align: center; border: 1px dashed #b8c6c0; border-radius: var(--radius); color: var(--muted); }
+
+		.talent-section { padding-top: 35px; }
+		.talent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+		.talent-card { background: var(--mint); border-radius: var(--radius); padding: 22px; }
+		.talent-head { display: flex; align-items: center; gap: 12px; }
+		.avatar { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 14px; background: var(--navy); color: var(--yellow); font-family: 'Space Grotesk'; font-size: 1.15rem; font-weight: 700; }
+		.talent-card h3 { font-size: 1.05rem; color: var(--navy); }
+		.talent-card small { color: #52736a; font-size: .74rem; }
+		.talent-card blockquote { margin: 20px 0 22px; color: #36564e; font-size: .86rem; }
+
+		.footer { background: var(--navy-strong); color: #c4d4d0; padding: 46px 0 30px; }
+		.footer-inner { width: min(1160px, calc(100% - 40px)); margin: 0 auto; display: flex; justify-content: space-between; gap: 30px; }
+		.footer .brand { color: white; }
+		.footer-copy { max-width: 280px; margin: 15px 0 0; color: #92aba7; font-size: .82rem; }
+		.footer-meta { align-self: end; color: #789490; font-size: .76rem; }
+
+		.modal-backdrop { position: fixed; inset: 0; z-index: 30; display: none; place-items: center; padding: 20px; background: rgba(15, 44, 57, .58); backdrop-filter: blur(5px); }
+		.modal-backdrop.open { display: grid; }
+		.modal { width: min(470px, 100%); max-height: 92vh; overflow: auto; background: #fff; border-radius: 22px; padding: 28px; box-shadow: 0 30px 90px rgba(0,0,0,.2); animation: rise .22s ease-out; }
+		@keyframes rise { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+		.modal-header { display: flex; justify-content: space-between; gap: 20px; margin-bottom: 22px; }
+		.modal h2 { font-size: 1.75rem; }
+		.close { border: 0; background: var(--paper); color: var(--muted); width: 34px; height: 34px; border-radius: 9px; font-size: 1.25rem; }
+		.form-group { margin-bottom: 14px; }
+		.form-group label { display: block; color: var(--navy); font-size: .78rem; font-weight: 700; margin-bottom: 6px; }
+		.form-group input, .form-group select, .form-group textarea { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding: 11px 12px; outline: 0; color: var(--ink); background: #fbfcfa; }
+		.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--coral); box-shadow: 0 0 0 3px rgba(229, 110, 79, .12); }
+		.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+		.form-switch { display: flex; gap: 8px; margin-bottom: 18px; }
+		.switch-btn { flex: 1; padding: 10px; border: 1px solid var(--line); border-radius: 9px; background: white; color: var(--muted); font-weight: 700; font-size: .8rem; }
+		.switch-btn.active { border-color: var(--navy); background: var(--navy); color: white; }
+		.form-foot { color: var(--muted); text-align: center; font-size: .75rem; margin-top: 14px; }
+		.toast { position: fixed; z-index: 50; right: 22px; bottom: 22px; display: none; max-width: 330px; background: var(--navy-strong); color: white; padding: 14px 17px; border-left: 4px solid var(--yellow); border-radius: 10px; box-shadow: var(--shadow); font-size: .84rem; }
+		.toast.show { display: block; animation: rise .2s ease-out; }
+
+		/* Professional career-network visual language */
+		body { background: #f3f6f8; }
+		.topbar { background: #102a43; }
+		.nav { background: rgba(255, 255, 255, .96); border-bottom-color: #d8e0e8; }
+		.nav-inner { min-height: 68px; }
+		.brand { color: #172b4d; font-size: 1.18rem; }
+		.brand-logo { width: 48px; height: 40px; border: 1px solid #e1e8ef; }
+		.nav-links { gap: 21px; color: #52606d; }
+		.nav-links a { padding: 23px 0 20px; border-bottom: 3px solid transparent; }
+		.nav-links a:hover, .nav-links a.active { color: #0a66c2; border-bottom-color: #0a66c2; }
+		.btn { border-radius: 999px; }
+		.btn-primary { background: #0a66c2; }
+		.btn-primary:hover { background: #004182; }
+		.btn-navy { background: #172b4d; }
+		.btn-navy:hover { background: #102a43; }
+		.btn-quiet { border-color: #b7c4d0; }
+		.btn-quiet:hover { background: #f0f6fc; }
+		.hero { background: #102a43; }
+		.hero::after { display: none; }
+		.hero-panel { border-radius: 12px; box-shadow: 0 12px 28px rgba(9, 30, 66, .25); transform: none; }
+		.stats { background: #fff; }
+		.job-card, .talent-card, .dashboard-card, .publish-panel, .summary-card { border-radius: 10px; }
+		.job-card:hover, .dashboard-card:hover { box-shadow: 0 8px 24px rgba(9, 30, 66, .12); }
+		.job-type { background: #e8f3ff; color: #0a66c2; }
+		.job-type.fixed { background: #e8f5ef; color: #216e4e; }
+		.talent-card { background: #eaf3fb; }
+		.footer { background: #102a43; }
+		.page-view { display: none; }
+		.page-view.active { display: block; }
+		.page-view.page-home.active { display: block; }
+		.page-view.page-content { padding: 60px 0 80px; }
+		.page-intro { margin-bottom: 28px; }
+		.page-intro p { max-width: 570px; margin: 10px 0 0; color: var(--muted); }
+		.opportunity-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+		.summary-card { padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: white; }
+		.summary-card strong { display: block; color: var(--navy); font-family: 'Space Grotesk'; font-size: 1.8rem; }
+		.summary-card span { color: var(--muted); font-size: .8rem; }
+		.home-details { padding: 58px 0 72px; }
+		.info-heading { max-width: 620px; margin-bottom: 26px; }
+		.info-heading p { margin: 10px 0 0; color: var(--muted); }
+		.info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+		.info-card { padding: 24px; border: 1px solid var(--line); border-radius: 10px; background: white; }
+		.info-number { color: #0a66c2; font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; }
+		.info-card h3 { margin: 15px 0 8px; color: var(--navy); font-size: 1.08rem; }
+		.info-card p { margin: 0; color: var(--muted); font-size: .84rem; }
+		.page-note { display: flex; align-items: center; gap: 14px; margin: -5px 0 24px; padding: 16px 18px; border-left: 4px solid #0a66c2; background: #eaf3fb; color: #344563; font-size: .86rem; }
+		.search-tools { display: grid; grid-template-columns: 1fr auto; gap: 12px; margin-bottom: 28px; }
+		.search-input { width: 100%; border: 1px solid #b7c4d0; border-radius: 999px; padding: 13px 18px; outline: 0; background: white; color: var(--ink); }
+		.search-input:focus { border-color: #0a66c2; box-shadow: 0 0 0 3px rgba(10, 102, 194, .12); }
+		.search-result { color: var(--muted); font-size: .8rem; align-self: center; }
+		.guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 0 0 30px; }
+		.guide-card { padding: 18px; border: 1px solid var(--line); border-radius: 10px; background: white; }
+		.guide-card strong { display: block; margin-bottom: 7px; color: var(--navy); }
+		.guide-card span { color: var(--muted); font-size: .8rem; }
+		.profile-layout { display: grid; grid-template-columns: 260px 1fr; gap: 20px; align-items: start; }
+		.profile-summary { padding: 24px; border: 1px solid var(--line); border-radius: 10px; background: white; text-align: center; }
+		.profile-avatar { width: 82px; height: 82px; display: grid; place-items: center; margin: 0 auto 15px; border-radius: 50%; background: #e8f3ff; color: #0a66c2; font-family: 'Space Grotesk'; font-size: 1.7rem; font-weight: 700; }
+		.profile-summary h3 { color: var(--navy); font-size: 1.15rem; }
+		.profile-summary p { margin: 7px 0 0; color: var(--muted); font-size: .8rem; }
+		.profile-form { padding: 26px; border: 1px solid var(--line); border-radius: 10px; background: white; }
+		.profile-form h3 { margin-bottom: 20px; color: var(--navy); font-size: 1.25rem; }
+		.profile-form .form-group { margin-bottom: 17px; }
+		.dashboard { display: none; background: #eef5f1; border-bottom: 1px solid var(--line); }
+		.dashboard.visible { display: block; animation: rise .3s ease-out; }
+		.dashboard-inner { width: min(1160px, calc(100% - 40px)); margin: 0 auto; padding: 42px 0 46px; }
+		.dashboard-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 26px; }
+		.dashboard-head h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+		.dashboard-head p { max-width: 480px; margin: 10px 0 0; color: var(--muted); }
+		.dashboard-menu { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+		.dashboard-card { display: flex; flex-direction: column; align-items: flex-start; min-height: 166px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: white; color: var(--navy); text-align: left; transition: transform .2s, box-shadow .2s; }
+		.dashboard-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-small); }
+		.dashboard-icon { display: grid; place-items: center; width: 38px; height: 38px; margin-bottom: 18px; border-radius: 10px; background: var(--coral-soft); color: var(--coral); font-size: 1.2rem; }
+		.dashboard-card:nth-child(2) .dashboard-icon { background: var(--mint); color: #287252; }
+		.dashboard-card:nth-child(3) .dashboard-icon { background: #fff4d2; color: #9a7014; }
+		.dashboard-card strong { font-family: 'Space Grotesk'; font-size: 1.12rem; }
+		.dashboard-card span { margin-top: 6px; color: var(--muted); font-size: .8rem; }
+		.publish-panel { display: none; margin-top: 18px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: white; }
+		.publish-panel.open { display: block; }
+		.publish-panel h3 { color: var(--navy); font-size: 1.3rem; margin-bottom: 16px; }
+		.publish-form { display: grid; grid-template-columns: 1.2fr 1fr 1fr auto; gap: 10px; align-items: end; }
+		.publish-form .form-group { margin: 0; }
+
+		@media (max-width: 850px) {
+			.hero-inner { grid-template-columns: 1fr; gap: 35px; padding: 58px 0 65px; }
+			.hero-panel { max-width: 500px; transform: none; }
+			.jobs-grid, .talent-grid { grid-template-columns: repeat(2, 1fr); }
+			.nav-links { display: none; }
+			.dashboard-menu { grid-template-columns: 1fr; }
+			.info-grid, .guide-grid { grid-template-columns: 1fr; }
+			.profile-layout { grid-template-columns: 1fr; }
+		}
+		@media (max-width: 580px) {
+			.topbar-inner { justify-content: center; text-align: center; }
+			.topbar-inner span:last-child { display: none; }
+			.topbar-inner, .nav-inner, .wrap, .hero-inner, .stats-inner, .footer-inner { width: min(100% - 28px, 1160px); }
+			.nav-inner { min-height: 68px; }
+			.nav-actions .btn-quiet { display: none; }
+			.nav-actions .btn { padding: 9px 12px; }
+			h1 { font-size: 2.8rem; }
+			.hero-copy { font-size: .95rem; }
+			.stats-inner { grid-template-columns: 1fr; padding: 10px 0; }
+			.stat, .stat:first-child, .stat:last-child { justify-content: flex-start; border: 0; padding: 8px 0; }
+			main { padding: 42px 0 60px; }
+			.section-head { display: block; }
+			.section-head .btn { margin-top: 18px; }
+			.jobs-grid, .talent-grid { grid-template-columns: 1fr; }
+			.footer-inner { display: block; }
+			.footer-meta { margin-top: 28px; }
+			.form-row { grid-template-columns: 1fr; gap: 0; }
+			.dashboard-inner { width: min(100% - 28px, 1160px); }
+			.dashboard-head { display: block; }
+			.dashboard-head .btn { margin-top: 18px; }
+			.publish-form { grid-template-columns: 1fr; }
+			.search-tools { grid-template-columns: 1fr; }
+			.search-result { justify-self: start; }
+		}
+	</style>
+</head>
+<body>
+	<div class="topbar"><div class="topbar-inner"><span><strong>INOVA</strong> conecta quem quer trabalhar com quem quer contratar.</span><span>Feito para oportunidades locais</span></div></div>
+	<header class="nav">
+		<div class="nav-inner">
+			<a class="brand" href="#inicio" aria-label="INOVA, início" data-page-link="home"><img class="brand-logo" src="imagens/3330d322-10a9-4a8f-a44a-e13c9b77d63a.png" alt="Logo INOVA Inclusão e Oportunidades"><span>INOVA</span></a>
+			<nav class="nav-links" aria-label="Navegação principal"><a href="#inicio" data-page-link="home">Home</a><a href="#vagas" data-page-link="publicacoes">Publicações</a><a href="#talentos" data-page-link="buscar">Buscar</a><a href="#oportunidades" data-page-link="oportunidades">Oportunidades</a></nav>
+			<div class="nav-actions" id="nav-actions"><button class="btn btn-quiet btn-small" data-open="login">Entrar</button><button class="btn btn-primary btn-small" data-open="register">Criar conta</button></div>
+		</div>
+	</header>
+
+	<section class="dashboard" id="dashboard" aria-labelledby="dashboard-title">
+		<div class="dashboard-inner">
+			<div class="dashboard-head"><div><div class="section-kicker">Área inicial</div><h2 id="dashboard-title">Olá, <span id="dashboard-name">pessoa</span>.</h2><p>Este é o seu ponto de partida. Publique, busque e acompanhe novas oportunidades em um só lugar.</p></div><button class="btn btn-primary" data-dashboard="publish">Publicar oportunidade <span>＋</span></button></div>
+			<div class="dashboard-menu" aria-label="Menu da área inicial"><button class="dashboard-card" data-dashboard="publish"><span class="dashboard-icon">＋</span><strong>Publicação</strong><span>Divulgue uma vaga, serviço ou bico.</span></button><button class="dashboard-card" data-dashboard="search"><span class="dashboard-icon">⌕</span><strong>Buscar</strong><span>Encontre talentos para o que você precisa.</span></button><button class="dashboard-card" data-dashboard="opportunities"><span class="dashboard-icon">↗</span><strong>Oportunidades</strong><span>Veja as vagas e trabalhos disponíveis agora.</span></button></div>
+			<div class="publish-panel" id="publish-panel"><h3>Nova oportunidade</h3><form class="publish-form" id="publish-form"><div class="form-group"><label for="publish-title">Título</label><input id="publish-title" required placeholder="Ex.: Auxiliar de atendimento"></div><div class="form-group"><label for="publish-type">Tipo</label><select id="publish-type"><option value="vaga">Vaga fixa</option><option value="bico">Bico temporário</option></select></div><div class="form-group"><label for="publish-location">Local</label><input id="publish-location" required placeholder="Cidade ou bairro"></div><button class="btn btn-navy" type="submit">Publicar</button></form></div>
+		</div>
+	</section>
+
+	<section class="hero page-view page-home active" id="inicio" data-page="home">
+		<div class="hero-inner">
+			<div>
+				<div class="eyebrow">Seu próximo passo começa aqui</div>
+				<h1>Oportunidade que começa perto.</h1>
+				<p class="hero-copy">Encontre um trabalho, divulgue seu talento ou publique uma oportunidade. Tudo em um só lugar, com gente da sua região.</p>
+				<div class="hero-actions"><a class="btn btn-primary" href="#vagas" data-page-link="publicacoes">Ver oportunidades <span>↗</span></a><button class="btn btn-quiet" data-open="register">Quero anunciar</button></div>
+				<div class="hero-note">Gratuito para começar · Cadastro em menos de 2 minutos</div>
+			</div>
+			<div class="hero-panel" aria-label="Oportunidades em destaque">
+				<div class="panel-top"><span class="panel-label">Movimentações de hoje</span><span class="live">ao vivo</span></div>
+				<div class="mini-job"><span class="mini-icon">⌁</span><div><h3>Auxiliar de atendimento</h3><p>Loja Nova Era · Centro</p></div><span class="mini-tag">Vaga fixa</span></div>
+				<div class="mini-job"><span class="mini-icon">✦</span><div><h3>Manutenção de computadores</h3><p>Lan House Central · Bairro</p></div><span class="mini-tag">Bico</span></div>
+				<div class="mini-job"><span class="mini-icon">＋</span><div><h3>Mais de 40 talentos</h3><p>disponíveis para conversar</p></div><span class="mini-tag">Agora</span></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="stats page-view page-home active" aria-label="Números da plataforma" data-page="home"><div class="stats-inner"><div class="stat"><strong id="job-count">0</strong><span>oportunidades abertas</span></div><div class="stat"><strong id="talent-count">0</strong><span>talentos cadastrados</span></div><div class="stat"><strong>100%</strong><span>focado na sua região</span></div></div></section>
+	<section class="home-details wrap page-view page-home active" data-page="home">
+		<div class="info-heading"><div class="section-kicker">Como a INOVA ajuda</div><h2>Conexões profissionais que começam na sua comunidade.</h2><p>Encontre oportunidades, mostre suas habilidades e converse diretamente com pessoas e empresas da sua região.</p></div>
+		<div class="info-grid"><article class="info-card"><span class="info-number">01</span><h3>Crie seu perfil</h3><p>Conte quem você é, quais habilidades possui e que tipo de oportunidade procura.</p></article><article class="info-card"><span class="info-number">02</span><h3>Explore possibilidades</h3><p>Compare vagas fixas, bicos e talentos por área, localização e disponibilidade.</p></article><article class="info-card"><span class="info-number">03</span><h3>Faça contato</h3><p>Mostre interesse ou ofereça uma oportunidade com poucos cliques e sem burocracia.</p></article></div>
+	</section>
+
+	<main class="wrap">
+		<section class="page-view page-content" id="vagas" data-page="publicacoes">
+			<div class="section-head"><div><div class="section-kicker">Mural de oportunidades</div><h2>O trabalho certo pode estar aqui.</h2><p>Explore vagas fixas e trabalhos temporários publicados por empresas locais.</p></div><button class="btn btn-navy" data-open="register">Publicar oportunidade <span>＋</span></button></div>
+			<div class="page-note"><strong>Para quem anuncia:</strong><span>publique uma oportunidade clara, informe o local e encontre pessoas interessadas em conversar.</span></div>
+			<div class="filters" role="group" aria-label="Filtrar oportunidades"><button class="filter active" data-filter="all">Todas</button><button class="filter" data-filter="bico">Bicos</button><button class="filter" data-filter="vaga">Vagas fixas</button></div>
+			<div class="jobs-grid" id="jobs-grid"></div>
+		</section>
+		<section class="talent-section page-view page-content" id="talentos" data-page="buscar">
+			<div class="section-head"><div><div class="section-kicker">Banco de talentos</div><h2>Gente pronta para fazer acontecer.</h2><p>Conheça profissionais disponíveis e entre em contato diretamente.</p></div></div>
+			<div class="search-tools"><input class="search-input" id="talent-search" type="search" placeholder="Buscar por nome, habilidade ou cidade"><span class="search-result" id="talent-result">3 talentos encontrados</span></div>
+			<div class="talent-grid" id="talent-grid"></div>
+		</section>
+		<section class="page-view page-content" id="oportunidades" data-page="oportunidades">
+			<div class="page-intro"><div class="section-kicker">Oportunidades</div><h2>Escolha seu próximo passo.</h2><p>Veja todas as oportunidades abertas e encontre uma opção que combine com você.</p></div>
+			<div class="opportunity-summary"><div class="summary-card"><strong id="opportunity-total">0</strong><span>oportunidades abertas</span></div><div class="summary-card"><strong id="fixed-total">0</strong><span>vagas fixas</span></div><div class="summary-card"><strong id="temporary-total">0</strong><span>bicos temporários</span></div></div>
+			<div class="guide-grid"><div class="guide-card"><strong>Se você procura trabalho</strong><span>Use os filtros, leia os detalhes e demonstre interesse nas vagas que combinam com você.</span></div><div class="guide-card"><strong>Se você oferece um serviço</strong><span>Apresente suas habilidades no banco de talentos para ser encontrado por contratantes.</span></div><div class="guide-card"><strong>Se você está contratando</strong><span>Publique uma oportunidade com informações claras e alcance pessoas da sua região.</span></div></div>
+			<div class="jobs-grid" id="opportunities-grid"></div>
+		</section>
+		<section class="page-view page-content" id="perfil" data-page="perfil">
+			<div class="page-intro"><div class="section-kicker">Meu perfil</div><h2>Apresente sua trajetória.</h2><p>Atualize seus dados para que as conexões na INOVA sejam mais relevantes.</p></div>
+			<div class="profile-layout"><aside class="profile-summary"><div class="profile-avatar" id="profile-avatar">IN</div><h3 id="profile-summary-name">Seu nome</h3><p id="profile-summary-type">Perfil profissional</p><p id="profile-summary-location">Sua cidade</p></aside><form class="profile-form" id="profile-form"><h3>Informações pessoais</h3><div class="form-row"><div class="form-group"><label for="profile-name">Nome completo</label><input id="profile-name" required></div><div class="form-group"><label for="profile-email">E-mail</label><input id="profile-email" type="email" required></div></div><div class="form-row"><div class="form-group"><label for="profile-phone">WhatsApp</label><input id="profile-phone" type="tel" placeholder="(00) 00000-0000"></div><div class="form-group"><label for="profile-city">Cidade</label><input id="profile-city" placeholder="Sua cidade"></div></div><div class="form-group"><label for="profile-type">Você é</label><select id="profile-type"><option value="trabalhador">Pessoa procurando oportunidade</option><option value="empresa">Empresa ou contratante</option></select></div><div class="form-group"><label for="profile-about">Sobre você</label><textarea id="profile-about" rows="5" placeholder="Habilidades, experiência e o que você procura"></textarea></div><button class="btn btn-primary" type="submit">Salvar alterações</button></form></div>
+		</section>
+	</main>
+
+	<footer class="footer"><div class="footer-inner"><div><a class="brand" href="#inicio"><img class="brand-logo" src="imagens/3330d322-10a9-4a8f-a44a-e13c9b77d63a.png" alt="Logo INOVA Inclusão e Oportunidades"><span>INOVA</span></a><p class="footer-copy">Uma ponte simples entre talentos e oportunidades reais da sua comunidade.</p></div><div class="footer-meta">© 2026 INOVA · Todos os direitos autorais de 2°Informática</div></div></footer>
+
+	<div class="modal-backdrop" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+		<div class="modal">
+			<div class="modal-header"><div><div class="section-kicker">INOVA</div><h2 id="modal-title">Bem-vindo de volta.</h2></div><button class="close" data-close aria-label="Fechar">×</button></div>
+			<div class="form-switch"><button class="switch-btn active" data-mode="login">Entrar</button><button class="switch-btn" data-mode="register">Criar conta</button></div>
+			<form id="auth-form">
+				<div id="register-fields" hidden><div class="form-group"><label for="account-type">Você é</label><select id="account-type"><option value="trabalhador">Pessoa procurando oportunidade</option><option value="empresa">Empresa ou contratante</option></select></div><div class="form-group"><label for="name">Nome completo ou empresa</label><input id="name" type="text" autocomplete="name" required></div></div>
+				<div class="form-group"><label for="email">E-mail</label><input id="email" type="email" autocomplete="email" placeholder="voce@email.com" required></div>
+				<div class="form-group"><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" placeholder="Mínimo de 6 caracteres" required></div>
+				<div id="profile-fields" hidden><div class="form-row"><div class="form-group"><label for="phone">WhatsApp</label><input id="phone" type="tel" placeholder="(00) 00000-0000"></div><div class="form-group"><label for="city">Cidade</label><input id="city" type="text" placeholder="Sua cidade"></div></div><div class="form-group"><label for="about">Fale um pouco sobre você</label><textarea id="about" rows="3" placeholder="Habilidades, experiência ou o que você procura"></textarea></div></div>
+				<button class="btn btn-primary" style="width:100%" type="submit" id="auth-submit">Entrar na plataforma <span>↗</span></button>
+				<div class="form-foot" id="auth-foot">Ainda não tem uma conta? Clique em criar conta.</div>
+			</form>
+		</div>
+	</div>
+	<div class="toast" id="toast" role="status"></div>
+
+	<script>
+		const initialJobs = [
+			{ id: 1, type: 'bico', title: 'Manutenção de computadores', company: 'Lan House Central', description: 'Formatar três computadores e instalar os programas essenciais neste fim de semana.', location: 'Centro · Este fim de semana' },
+			{ id: 2, type: 'vaga', title: 'Auxiliar de atendimento e vendas', company: 'Loja Nova Era', description: 'Atendimento via WhatsApp e redes sociais. Não exige experiência anterior.', location: 'Centro · Horário comercial' },
+			{ id: 3, type: 'bico', title: 'Apoio em organização de evento', company: 'Casa do Sabor', description: 'Apoio na montagem, recepção de convidados e organização ao final do evento.', location: 'Jardim · Sábado' },
+			{ id: 4, type: 'vaga', title: 'Assistente administrativo', company: 'Instituto Horizonte', description: 'Organização de documentos, planilhas e atendimento aos parceiros do projeto.', location: 'Centro · Segunda a sexta' },
+			{ id: 5, type: 'vaga', title: 'Auxiliar de logística', company: 'Mercado Bom Vizinho', description: 'Controle de estoque, conferência de pedidos e apoio na separação de mercadorias.', location: 'Vila Nova · Turno da manhã' },
+			{ id: 6, type: 'bico', title: 'Fotografia para catálogo', company: 'Ateliê Criativo', description: 'Produção de fotos simples de produtos para catálogo digital e redes sociais.', location: 'Bairro Novo · Projeto pontual' },
+			{ id: 7, type: 'bico', title: 'Aulas de reforço escolar', company: 'Conexão Educação', description: 'Acompanhamento de alunos do ensino fundamental em matemática e português.', location: 'Vila Esperança · Tardes' },
+			{ id: 8, type: 'vaga', title: 'Recepcionista', company: 'Clínica Viver Bem', description: 'Recepção de pacientes, agendamentos e atendimento telefônico.', location: 'Centro · Horário comercial' },
+			{ id: 9, type: 'bico', title: 'Social media para pequeno negócio', company: 'Empório da Praça', description: 'Criar publicações semanais e responder mensagens nas redes sociais.', location: 'Online · Flexível' }
+		];
+		const initialTalents = [
+			{ name: 'João Silva', about: 'Domino Word, Excel e digitação rápida. Também desenvolvo sites para projetos.', city: 'Centro', skills: 'Informática' },
+			{ name: 'Carlos Eduardo', about: 'Disponível para bicos de fim de semana, estoque e organização.', city: 'Bairro Novo', skills: 'Organização' },
+			{ name: 'Maria Clara', about: 'Experiência com atendimento, vendas e produção de conteúdo para redes sociais.', city: 'Vila Esperança', skills: 'Atendimento' }
+		];
+		const savedJobs = JSON.parse(localStorage.getItem('pc_jobs') || 'null');
+		const savedTalents = JSON.parse(localStorage.getItem('pc_talents') || 'null');
+		let jobs = savedJobs ? [...savedJobs, ...initialJobs.filter(job => !savedJobs.some(savedJob => savedJob.id === job.id))] : initialJobs;
+		let talents = savedTalents ? [...savedTalents, ...initialTalents.filter(talent => !savedTalents.some(savedTalent => savedTalent.name === talent.name))] : initialTalents;
+		let users = JSON.parse(localStorage.getItem('pc_users') || '[]');
+		let activeUser = JSON.parse(localStorage.getItem('pc_active_user') || 'null');
+		let authMode = 'login';
+		let currentFilter = 'all';
+
+		const $ = selector => document.querySelector(selector);
+		const escapeHTML = value => String(value).replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;' }[char]));
+		function save() { localStorage.setItem('pc_jobs', JSON.stringify(jobs)); localStorage.setItem('pc_talents', JSON.stringify(talents)); localStorage.setItem('pc_users', JSON.stringify(users)); localStorage.setItem('pc_active_user', JSON.stringify(activeUser)); }
+		function initials(name) { return name.split(' ').slice(0, 2).map(part => part[0]).join('').toUpperCase(); }
+		function showToast(message) { const toast = $('#toast'); toast.textContent = message; toast.classList.add('show'); clearTimeout(showToast.timer); showToast.timer = setTimeout(() => toast.classList.remove('show'), 3200); }
+
+		function renderJobs() {
+			const list = $('#jobs-grid');
+			const filtered = currentFilter === 'all' ? jobs : jobs.filter(job => job.type === currentFilter);
+			const markup = filtered.length ? filtered.map(job => `<article class="job-card"><div><div class="job-card-top"><span class="job-type ${job.type === 'vaga' ? 'fixed' : ''}">${job.type === 'vaga' ? 'Vaga fixa' : 'Bico temporário'}</span><button class="bookmark" aria-label="Salvar oportunidade" data-save="${job.id}">♡</button></div><h3>${escapeHTML(job.title)}</h3><div class="company">${escapeHTML(job.company)}</div><p class="job-description">${escapeHTML(job.description)}</p></div><div class="job-footer"><span class="location">⌖ ${escapeHTML(job.location || 'Oportunidade local')}</span><button class="btn btn-quiet btn-small" data-interest="${job.id}">Tenho interesse</button></div></article>`).join('') : '<div class="empty">Nenhuma oportunidade encontrada neste filtro.</div>';
+			list.innerHTML = markup;
+			$('#opportunities-grid').innerHTML = markup;
+			$('#job-count').textContent = jobs.length;
+			$('#opportunity-total').textContent = jobs.length;
+			$('#fixed-total').textContent = jobs.filter(job => job.type === 'vaga').length;
+			$('#temporary-total').textContent = jobs.filter(job => job.type === 'bico').length;
+		}
+		function renderTalents() {
+			const query = ($('#talent-search')?.value || '').trim().toLowerCase();
+			const filtered = talents.filter(talent => [talent.name, talent.about, talent.city, talent.skills].some(value => String(value || '').toLowerCase().includes(query)));
+			$('#talent-grid').innerHTML = filtered.length ? filtered.map(talent => `<article class="talent-card"><div class="talent-head"><div class="avatar">${escapeHTML(initials(talent.name))}</div><div><h3>${escapeHTML(talent.name)}</h3><small>⌖ ${escapeHTML(talent.city || 'Sua região')} · ${escapeHTML(talent.skills || 'Disponível')}</small></div></div><blockquote>“${escapeHTML(talent.about)}”</blockquote><button class="btn btn-navy btn-small" data-contact="${escapeHTML(talent.name)}">Oferecer oportunidade <span>↗</span></button></article>`).join('') : '<div class="empty">Nenhum talento encontrado para essa busca.</div>';
+			$('#talent-count').textContent = talents.length;
+			$('#talent-result').textContent = `${filtered.length} ${filtered.length === 1 ? 'talento encontrado' : 'talentos encontrados'}`;
+		}
+		function updateNav() { $('#nav-actions').innerHTML = activeUser ? `<button class="btn btn-primary btn-small" data-page-link="perfil">Meu perfil</button><span style="color:var(--muted);font-size:.8rem;font-weight:700">Olá, ${escapeHTML(activeUser.name.split(' ')[0])}</span><button class="btn btn-quiet btn-small" data-logout>Sair</button>` : '<button class="btn btn-quiet btn-small" data-open="login">Entrar</button><button class="btn btn-primary btn-small" data-open="register">Criar conta</button>'; const onHome = !location.hash || location.hash === '#inicio'; $('#dashboard').classList.toggle('visible', Boolean(activeUser) && onHome); $('#dashboard-name').textContent = activeUser ? activeUser.name.split(' ')[0] : 'pessoa'; }
+		function fillProfile() { if (!activeUser) return; $('#profile-name').value = activeUser.name || ''; $('#profile-email').value = activeUser.email || ''; $('#profile-phone').value = activeUser.phone || ''; $('#profile-city').value = activeUser.city || ''; $('#profile-type').value = activeUser.type || 'trabalhador'; $('#profile-about').value = activeUser.about || ''; $('#profile-summary-name').textContent = activeUser.name || 'Seu nome'; $('#profile-summary-type').textContent = activeUser.type === 'empresa' ? 'Empresa ou contratante' : 'Pessoa procurando oportunidade'; $('#profile-summary-location').textContent = activeUser.city || 'Cidade não informada'; $('#profile-avatar').textContent = initials(activeUser.name || 'IN'); }
+		function showPage(page) { if (page === 'perfil' && !activeUser) { openModal('login'); return; } document.querySelectorAll('[data-page]').forEach(view => view.classList.toggle('active', view.dataset.page === page)); document.querySelectorAll('[data-page-link]').forEach(link => link.classList.toggle('active', link.dataset.pageLink === page)); const hash = page === 'home' ? '#inicio' : `#${page === 'publicacoes' ? 'vagas' : page === 'buscar' ? 'talentos' : page === 'oportunidades' ? 'oportunidades' : 'perfil'}`; history.replaceState(null, '', hash); $('#dashboard').classList.toggle('visible', Boolean(activeUser) && page === 'home'); if (page === 'perfil') fillProfile(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+		function openModal(mode) { authMode = mode; $('#auth-modal').classList.add('open'); updateAuthMode(); setTimeout(() => $('#email').focus(), 50); }
+		function closeModal() { $('#auth-modal').classList.remove('open'); }
+		function updateAuthMode() { const register = authMode === 'register'; $('#modal-title').textContent = register ? 'Comece sua próxima fase.' : 'Bem-vindo de volta.'; $('#register-fields').hidden = !register; $('#profile-fields').hidden = !register; $('#auth-submit').innerHTML = register ? 'Criar minha conta <span>↗</span>' : 'Entrar na plataforma <span>↗</span>'; $('#auth-foot').textContent = register ? 'Seus dados ficam salvos somente neste navegador.' : 'Ainda não tem uma conta? Clique em criar conta.'; document.querySelectorAll('.switch-btn').forEach(button => button.classList.toggle('active', button.dataset.mode === authMode)); }
+
+		document.addEventListener('click', event => {
+			const pageLink = event.target.closest('[data-page-link]');
+			if (pageLink) { event.preventDefault(); showPage(pageLink.dataset.pageLink); }
+			const open = event.target.closest('[data-open]'); if (open) openModal(open.dataset.open);
+			if (event.target.closest('[data-close]') || event.target.id === 'auth-modal') closeModal();
+			const mode = event.target.closest('[data-mode]'); if (mode) { authMode = mode.dataset.mode; updateAuthMode(); }
+			const filter = event.target.closest('[data-filter]'); if (filter) { currentFilter = filter.dataset.filter; document.querySelectorAll('.filter').forEach(button => button.classList.toggle('active', button === filter)); renderJobs(); }
+			const interest = event.target.closest('[data-interest]'); if (interest) { if (!activeUser) return openModal('login'); showToast('Mensagem enviada! A empresa poderá entrar em contato com você.'); }
+			const contact = event.target.closest('[data-contact]'); if (contact) { if (!activeUser) return openModal('login'); showToast(`Proposta iniciada para ${contact.dataset.contact}.`); }
+			const bookmark = event.target.closest('[data-save]'); if (bookmark) { bookmark.classList.toggle('saved'); bookmark.textContent = bookmark.classList.contains('saved') ? '♥' : '♡'; showToast(bookmark.classList.contains('saved') ? 'Oportunidade salva.' : 'Oportunidade removida dos salvos.'); }
+			if (event.target.closest('[data-logout]')) { activeUser = null; save(); updateNav(); showPage('home'); showToast('Você saiu da sua conta.'); }
+			const dashboardAction = event.target.closest('[data-dashboard]');
+			if (dashboardAction) {
+				if (dashboardAction.dataset.dashboard === 'publish') { showPage('publicacoes'); $('#publish-panel').classList.add('open'); $('#publish-title').focus(); }
+				if (dashboardAction.dataset.dashboard === 'search') showPage('buscar');
+				if (dashboardAction.dataset.dashboard === 'opportunities') showPage('oportunidades');
+			}
+		});
+		$('#auth-form').addEventListener('submit', event => {
+			event.preventDefault(); const email = $('#email').value.trim().toLowerCase(); const password = $('#password').value;
+			if (password.length < 6) return showToast('A senha precisa ter pelo menos 6 caracteres.');
+			if (authMode === 'login') { const user = users.find(item => item.email === email && item.password === password); if (!user) return showToast('E-mail ou senha incorretos.'); activeUser = user; showToast('Login realizado. Bom trabalho!'); }
+			else { const name = $('#name').value.trim(); if (users.some(item => item.email === email)) return showToast('Este e-mail já está cadastrado.'); const user = { name, email, password, type: $('#account-type').value, phone: $('#phone').value.trim(), city: $('#city').value.trim(), about: $('#about').value.trim() }; users.push(user); activeUser = user; if (user.type === 'trabalhador') talents.unshift({ name, about: user.about || 'Profissional disponível para novas oportunidades.', city: user.city || 'Sua região', skills: 'Novo talento' }); showToast('Conta criada com sucesso!'); }
+			save(); updateNav(); closeModal(); renderTalents();
+		});
+		$('#profile-form').addEventListener('submit', event => {
+			event.preventDefault();
+			const previousName = activeUser.name;
+			const updated = { ...activeUser, name: $('#profile-name').value.trim(), email: $('#profile-email').value.trim().toLowerCase(), phone: $('#profile-phone').value.trim(), city: $('#profile-city').value.trim(), type: $('#profile-type').value, about: $('#profile-about').value.trim() };
+			if (users.some(user => user.email === updated.email && user !== activeUser)) return showToast('Este e-mail já está em uso.');
+			Object.assign(activeUser, updated); const userIndex = users.findIndex(user => user.email === updated.email || user === activeUser); if (userIndex >= 0) users[userIndex] = activeUser;
+			const talent = talents.find(item => item.name === previousName); if (talent && updated.type === 'trabalhador') { talent.name = updated.name; talent.about = updated.about || talent.about; talent.city = updated.city || talent.city; }
+			save(); updateNav(); renderTalents(); fillProfile(); showToast('Perfil atualizado com sucesso.');
+		});
+		$('#publish-form').addEventListener('submit', event => {
+			event.preventDefault();
+			jobs.unshift({ id: Date.now(), type: $('#publish-type').value, title: $('#publish-title').value.trim(), company: activeUser.name, description: 'Nova oportunidade publicada pela comunidade INOVA.', location: $('#publish-location').value.trim() });
+			save(); renderJobs(); $('#publish-form').reset(); $('#publish-panel').classList.remove('open'); showToast('Oportunidade publicada com sucesso!');
+		});
+		$('#talent-search').addEventListener('input', renderTalents);
+		$('#auth-modal').addEventListener('keydown', event => { if (event.key === 'Escape') closeModal(); });
+		renderJobs(); renderTalents(); updateNav(); showPage(location.hash === '#vagas' ? 'publicacoes' : location.hash === '#talentos' ? 'buscar' : location.hash === '#oportunidades' ? 'oportunidades' : location.hash === '#perfil' ? 'perfil' : 'home');
+	</script>
+</body>
+</html>
